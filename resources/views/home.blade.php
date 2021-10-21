@@ -14,7 +14,11 @@
                         </div>
                     @endif
 
+                    @if(Auth::user()->isVerified())
                     You are logged in!
+                    @else
+                    Check your e-mail and click on the verification link
+                    @endif
                 </div>
             </div>
         </div>

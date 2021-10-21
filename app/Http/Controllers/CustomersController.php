@@ -7,6 +7,13 @@ use Illuminate\Http\Request;
 
 class CustomersController extends Controller
 {
+
+    // Only verified users can get here
+    public function __construct()
+    {
+        $this->middleware('verified');
+    }
+
     /**
      * Display a listing of the resource.
      *
