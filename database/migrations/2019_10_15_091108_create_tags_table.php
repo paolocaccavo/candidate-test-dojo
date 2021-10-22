@@ -21,6 +21,21 @@ class CreateTagsTable extends Migration
         });
 
         factory(Tag::class, 10)->create();
+
+        // ***** In alternativa si potrebbe creare una tabella di relazione molti a molti polimorfica 'taggables'
+        Schema::create('order_tag', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            
+            $table->unsignedInteger('order_id');
+            $table->foreign('order_id')->references('id')->on('orders');
+
+            $table->unsignedInteger('tag_id');
+            $table->foreign('tag_id')->references('id')->on('tags');
+
+            $table->unique(['tag_id', 'order_id']);
+
+            $table->timestamps();
+        });
     }
 
     /**

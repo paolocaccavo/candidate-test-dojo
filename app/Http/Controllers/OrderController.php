@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Customer;
+use App\Models\Order;
 use Illuminate\Http\Request;
 
-class CustomersController extends Controller
+class OrderController extends Controller
 {
     // Only verified users can get here
     public function __construct()
@@ -20,7 +20,7 @@ class CustomersController extends Controller
      */
     public function index()
     {
-        return view('customers.index')->withCustomers(Customer::paginate(10));
+        //
     }
 
     /**
@@ -30,7 +30,7 @@ class CustomersController extends Controller
      */
     public function create()
     {
-        return view('customers.create')->withCustomer(new Customer);
+        //
     }
 
     /**
@@ -41,46 +41,51 @@ class CustomersController extends Controller
      */
     public function store(Request $request)
     {
-        $customer = Customer::create($request->all());
+        //
+    }
 
-        return redirect()->route('customers.edit', $customer)->withMessage('Customer created successfully.');
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Order  $order
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Order $order)
+    {
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Customer  $customer
+     * @param  \App\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function edit(Customer $customer)
+    public function edit(Order $order)
     {
-        return view('customers.edit', compact('customer'));
+        //
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Customer  $customer
+     * @param  \App\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Customer $customer)
+    public function update(Request $request, Order $order)
     {
-        $customer->update($request->all());
-
-        return view('customers.edit', compact('customer'))->withMessage('Customer updated successfully.');
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Customer  $customer
+     * @param  \App\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Customer $customer)
+    public function destroy(Order $order)
     {
-        $customer->delete();
-
-        return redirect()->route('customers.index')->withMessage('Customer deleted successfully');
+        //
     }
 }

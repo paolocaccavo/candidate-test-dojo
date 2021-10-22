@@ -15,4 +15,15 @@ class Customer extends Model
     {
         return $this->hasMany(Order::class);
     }
+
+    public function contracts()
+    {
+        return $this->hasMany(Contract::class);
+    }
+
+    // ***** Alternativa ad aggiungere una foreign_key del cliente nel contratto: *****
+    // public function contracts()
+    // {
+    //     return $this->hasManyThrough(Contract::class, Order::class);
+    // }
 }
