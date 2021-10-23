@@ -10,7 +10,7 @@ L'utente deve essere in grado di autenticarsi. (Nota, l'utente autenticato verr�
 
 * Durante la creazione e modifica di un Ordine, quest'ultimo potrà essere associato ad uno o più Tags già presenti nel sistema >> tabella pivot order_tag
 
-* Quando viene cancellato un Ordine, viene cancellato il Contratto >> public static boot, all' Order::deleted parte un foreach di cancellazione dei contratti
+* Quando viene cancellato un Ordine, viene cancellato il Contratto >> public static boot, all' Order::deleted parte la cancellazione del contratto
 
 * Quando viene cancellato un Cliente, vengono cancellati tutti gli Ordini e tutti i Contratti appartenenti a quel Cliente >> public static boot, al Client::deleted parte un foreach di cancellazione degli ordini
 

@@ -11,6 +11,17 @@ class Customer extends Model
 
     protected $fillable = ['first_name', 'last_name', 'email', 'phone', 'company'];
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function($customer) {
+            foreach($customer->orders as $order) {
+                $order->delete();
+            }
+        });
+    }
+
     // ***** Accessor per il nome e cognome *****
     public function getFullnameAttribute()
     {
