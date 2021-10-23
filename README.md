@@ -17,3 +17,5 @@ L'utente deve essere in grado di autenticarsi. (Nota, l'utente autenticato verrÃ
 * Tutte le cancellazioni devono essere recuperabili >> implementare le soft deletes su tutte le tabelle; il foreach di cancellazioni al posto di un delete on cascade rende possibile il recupero dei dati cancellati
 
 P.S.: fixato il tasto delete non funzionante nell'index dei clienti; fixato il nome del model errato nella relazione belongsTo customer() in App\Models\Order; fixato il protected $fillable mancante in App\Models\Order; fixato flash message non funzionante nel metodo update del Customer
+
+N.B.: per testare il giro completo, va prima configurarato un MAIL_HOST funzionante nel file .env
