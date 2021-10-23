@@ -68,7 +68,7 @@ class CustomersController extends Controller
     {
         $customer->update($request->all());
 
-        return view('customers.edit', compact('customer'))->withMessage('Customer updated successfully.');
+        return redirect()->route('customers.edit', $customer)->withMessage('Customer updated successfully.');
     }
 
     /**

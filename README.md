@@ -1,10 +1,10 @@
 ## TempCRM
 
-L'utente deve essere in grado di autenticarsi. (Nota, l'utente autenticato verrà considerato admin). >> metodo isVerifyed() creato nel model User, che controlla che email_verifyed_at non sia null; aggiunta di ['verify' => true] nelle Auth::routes()
+L'utente deve essere in grado di autenticarsi. (Nota, l'utente autenticato verrà considerato admin). >> metodo isVerifyed() creato nel model User, che controlla che email_verifyed_at non sia null; aggiunta di ['verify' => true] nelle Auth::routes(), aggiunta del middleware 'verified' nei controller diversi da HomeController
 
-* L'utente deve essere in grado di creare Clienti >> middleware 'verified' nei CustomerController
+* L'utente deve essere in grado di creare Clienti
 
-* L'utente deve essere in grado di creare Ordini ed associarli a Clienti. >> middleware 'verified' in OrderController (da create) e Vincolo di integrità referenziale aggiunto alla relazione (esistente)
+* L'utente deve essere in grado di creare Ordini ed associarli a Clienti. >> Contoller e Viste admin
 
 * Quando un Ordine viene creato, viene automaticamente creato un Contratto associato al Cliente e all'Ordine. >> public static boot, all' Order::created viene creato un contratto associato all'ordine e al cliente
 
@@ -16,4 +16,4 @@ L'utente deve essere in grado di autenticarsi. (Nota, l'utente autenticato verr�
 
 * Tutte le cancellazioni devono essere recuperabili >> implementare le soft deletes su tutte le tabelle; il foreach di cancellazioni al posto di un delete on cascade rende possibile il recupero dei dati cancellati
 
-P.S.: fixato il tasto delete non funzionante nell'index dei clienti e il model errato nella relazione customer di App\Models\Order
+P.S.: fixato il tasto delete non funzionante nell'index dei clienti; fixato il model errato nella relazione customer di App\Models\Order; fixato il protected $fillable mancante in Order; fixato il withMessage non funzionante nel metodo update del Customer

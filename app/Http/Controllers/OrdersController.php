@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Order;
 use Illuminate\Http\Request;
 
-class OrderController extends Controller
+class OrdersController extends Controller
 {
     // Only verified users can get here
     public function __construct()
@@ -20,7 +20,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+        return view('orders.index')->withOrders(Order::paginate(10));
     }
 
     /**
@@ -30,7 +30,7 @@ class OrderController extends Controller
      */
     public function create()
     {
-        //
+        return view('orders.create')->withOrder(new Order);
     }
 
     /**
@@ -41,7 +41,9 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $order = Order::create($request->all());
+
+        return redirect()->route('orders.edit', $order)->withMessage('Order created successfully.');
     }
 
     /**
@@ -52,7 +54,7 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
-        //
+        return view('orders.show', compact('order'));
     }
 
     /**
@@ -63,7 +65,7 @@ class OrderController extends Controller
      */
     public function edit(Order $order)
     {
-        //
+        return view('orders.edit', compact('order'));
     }
 
     /**
@@ -75,7 +77,9 @@ class OrderController extends Controller
      */
     public function update(Request $request, Order $order)
     {
-        //
+        $order->update($request->all());
+
+        return redirect()->route('orders.edit', $order)->withMessage('Order updated successfully.');
     }
 
     /**
@@ -86,6 +90,8 @@ class OrderController extends Controller
      */
     public function destroy(Order $order)
     {
-        //
+        $order->delete();
+
+        return redirect()->route('orders.index')->withMessage('Order deleted successfully');
     }
 }

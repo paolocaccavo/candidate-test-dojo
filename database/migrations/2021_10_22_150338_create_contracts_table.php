@@ -16,17 +16,18 @@ class CreateContractsTable extends Migration
         Schema::create('contracts', function (Blueprint $table) {
             $table->bigIncrements('id');
 
-            $table->unsignedInteger('order_id');
+            $table->unsignedBigInteger('order_id');
             $table->foreign('order_id')->references('id')->on('orders');
 
             // ***** Facoltativo se si decide di utilizzare la HasManyThrough in App\Models\Contract *****
-            $table->unsignedInteger('customer_id');
+            $table->unsignedBigInteger('customer_id');
             $table->foreign('customer_id')->references('id')->on('customers');
 
             $table->text('title');
             $table->text('description');
 
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

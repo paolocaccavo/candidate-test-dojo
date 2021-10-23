@@ -26,10 +26,10 @@ class CreateTagsTable extends Migration
         Schema::create('order_tag', function (Blueprint $table) {
             $table->bigIncrements('id');
             
-            $table->unsignedInteger('order_id');
+            $table->unsignedBigInteger('order_id');
             $table->foreign('order_id')->references('id')->on('orders');
 
-            $table->unsignedInteger('tag_id');
+            $table->unsignedBigInteger('tag_id');
             $table->foreign('tag_id')->references('id')->on('tags');
 
             $table->unique(['tag_id', 'order_id']);
