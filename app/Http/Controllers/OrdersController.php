@@ -41,7 +41,14 @@ class OrdersController extends Controller
      */
     public function store(Request $request)
     {
-        $order = Order::create($request->all());
+        $order = Order::create([
+            'customer_id' => $request->customer_id,
+            'title' => $request->title,
+            'description' => $request->description,
+            'cost' => $request->cost,
+        ]);
+
+        $order->tags()->sync($request->tag_ids);
 
         return redirect()->route('orders.edit', $order)->withMessage('Order created successfully.');
     }
@@ -77,7 +84,14 @@ class OrdersController extends Controller
      */
     public function update(Request $request, Order $order)
     {
-        $order->update($request->all());
+        $order->update([
+            'customer_id' => $request->customer_id,
+            'title' => $request->title,
+            'description' => $request->description,
+            'cost' => $request->cost,
+        ]);
+
+        $order->tags()->sync($request->tag_ids);
 
         return redirect()->route('orders.edit', $order)->withMessage('Order updated successfully.');
     }

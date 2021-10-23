@@ -6,7 +6,7 @@ L'utente deve essere in grado di autenticarsi. (Nota, l'utente autenticato verr�
 
 * L'utente deve essere in grado di creare Ordini ed associarli a Clienti. >> Contoller e Viste admin
 
-* Quando un Ordine viene creato, viene automaticamente creato un Contratto associato al Cliente e all'Ordine. >> public static boot, all' Order::created viene creato un contratto associato all'ordine e al cliente
+* Quando un Ordine viene creato, viene automaticamente creato un Contratto associato al Cliente e all'Ordine. >> All'evento Order::created viene creato un contratto associato all'ordine e al cliente
 
 * Durante la creazione e modifica di un Ordine, quest'ultimo potrà essere associato ad uno o più Tags già presenti nel sistema >> tabella pivot order_tag
 

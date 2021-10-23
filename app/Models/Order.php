@@ -15,13 +15,18 @@ class Order extends Model
     {
         parent::boot();
 
-        static::created(function ($order) {
+        static::created(function($order) {
             Contract::create([
                 'order_id' => $order->id,
                 'customer_id' => $order->customer->id,
                 'title' => 'New contract for order ' . $order->id,
                 'description' => $order->customer->fullname . ' completed the order' . $order->id . ' successfully',
             ]);
+        });
+
+        static::deleting(function($order) {
+            $order->contract->delete();
+            $order->tags()->detach();
         });
     }
     
@@ -33,5 +38,10 @@ class Order extends Model
     public function contract()
     {
         return $this->hasOne(Contract::class);
+    }
+
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
     }
 }

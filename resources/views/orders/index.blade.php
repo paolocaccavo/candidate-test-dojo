@@ -26,7 +26,7 @@
             <th scope="row">{{ $order->id }}</th>
             <td>{{ $order->title }}</td>
             <td>{{ $order->description }}</td>
-            <td>{{ $order->cost }}</td>
+            <td>€ {{ number_format($order->cost, 2, ',', '.') }}</td>
             <td>{{ optional($order->customer)->fullname ?: '-' }}</td>
             <td><a href="{{ route('orders.edit', $order) }}">[Edit]</a></td>
             <td>
