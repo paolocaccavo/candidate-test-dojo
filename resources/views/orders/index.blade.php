@@ -17,7 +17,7 @@
           <th scope="col">Description</th>
           <th scope="col">Cost</th>
           <th scope="col">Customer</th>
-          <th scope="col" colspan="2" class="text-center">Actions</th>
+          <th scope="col" colspan="3" class="text-center">Actions</th>
         </tr>
       </thead>
       <tbody>
@@ -28,6 +28,7 @@
             <td>{{ $order->description }}</td>
             <td>€ {{ number_format($order->cost, 2, ',', '.') }}</td>
             <td>{{ optional($order->customer)->fullname ?: '-' }}</td>
+            <td><a href="{{ route('orders.show', $order) }}">[Show]</a></td>
             <td><a href="{{ route('orders.edit', $order) }}">[Edit]</a></td>
             <td>
               <form id="delete-order-{{ $order->id }}-form" action="{{ route('orders.destroy', $order) }}" method="POST">
