@@ -4,7 +4,7 @@
       <label>Customer</label>
       <select name="customer_id" id="customer_id" class="form-control" required>
         <option value="">- Select customer -</option>
-        @foreach(App\Models\Customer::orderBy('last_name', 'asc')->get() as $customer)
+        @foreach($customers as $customer)
         <option value="{{ $customer->id }}" {{ $order->customer_id == $customer->id ?  'selected' : '' }}>{{ $customer->fullname }} ({{ $customer->company }})</option>
         @endforeach
       </select>

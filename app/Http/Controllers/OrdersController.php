@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Tag;
 use App\Models\Order;
+use App\Models\Customer;
 use Illuminate\Http\Request;
 
 class OrdersController extends Controller
@@ -30,7 +32,9 @@ class OrdersController extends Controller
      */
     public function create()
     {
-        return view('orders.create')->withOrder(new Order);
+        $customers = Customer::orderBy('last_name')->get();
+        $tags = Tag::orderBy('name')->get();
+        return view('orders.create', compact('customers', 'tags'))->withOrder(new Order);
     }
 
     /**
@@ -72,7 +76,9 @@ class OrdersController extends Controller
      */
     public function edit(Order $order)
     {
-        return view('orders.edit', compact('order'));
+        $customers = Customer::orderBy('last_name')->get();
+        $tags = Tag::orderBy('name')->get();
+        return view('orders.edit', compact('order', 'customers', 'tags'));
     }
 
     /**
