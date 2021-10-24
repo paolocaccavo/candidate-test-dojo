@@ -1,6 +1,6 @@
 ## TempCRM
 
-L'utente deve essere in grado di autenticarsi. (Nota, l'utente autenticato verrà considerato admin). >> metodo isVerifyed() creato nel model User, che controlla che email_verifyed_at non sia null; aggiunta di ['verify' => true] nelle Auth::routes(), aggiunta del middleware 'verified' nei controller (tranne in HomeController)
+L'utente deve essere in grado di autenticarsi. (Nota, l'utente autenticato verrà considerato admin). >> metodo isVerifyed() creato nel model User, che controlla che email_verifyed_at non sia null; aggiunta di ['verify' => true] nelle Auth::routes(), aggiunta del middleware 'verified' nei vari controller (tranne in HomeController)
 
 * L'utente deve essere in grado di creare Clienti
 
@@ -14,8 +14,8 @@ L'utente deve essere in grado di autenticarsi. (Nota, l'utente autenticato verr�
 
 * Quando viene cancellato un Cliente, vengono cancellati tutti gli Ordini e tutti i Contratti appartenenti a quel Cliente >> public static boot, al Customer::deleted parte un foreach di cancellazione degli ordini
 
-* Tutte le cancellazioni devono essere recuperabili >> implementare le soft deletes su tutte le tabelle; il foreach di cancellazioni al posto di un delete on cascade rende possibile il recupero dei dati cancellati
+* Tutte le cancellazioni devono essere recuperabili >> soft deletes su tutte le tabelle; foreach di cancellazioni al posto di un delete on cascade, per rendere possibile il recupero dei dati cancellati; vista con i customers trashed e rotta restore per ripristinarli; ripristino a cascata degli ordini e contratti relativi
 
 P.S.: fixato il tasto delete non funzionante nell'index dei clienti; fixato il nome del model errato nella relazione belongsTo customer() in App\Models\Order; fixato il protected $fillable mancante in App\Models\Order; fixato flash message non funzionante nel metodo update del Customer
 
-N.B.: per testare il giro completo, va prima configurarato un MAIL_HOST funzionante nel file .env
+N.B.: per testare il giro completo, oltre al db, va configurarato un MAIL_HOST funzionante nel file .env
