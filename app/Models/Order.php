@@ -24,9 +24,15 @@ class Order extends Model
             ]);
         });
 
+        // Soft delete del contratto associato all'ordine, distacco dei tags
         static::deleting(function($order) {
             $order->contract->delete();
             $order->tags()->detach();
+        });
+
+        // Ripristino del contratto associato all'ordine
+        static::restored(function($order) {
+            $order->contract()->onlyTrashed()->restore();
         });
     }
     

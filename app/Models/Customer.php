@@ -15,9 +15,17 @@ class Customer extends Model
     {
         parent::boot();
 
+        // Soft delete degli ordini del cliente
         static::deleting(function($customer) {
             foreach($customer->orders as $order) {
                 $order->delete();
+            }
+        });
+
+        // Ripristino degli ordini del cliente
+        static::restored(function($customer) {
+            foreach($customer->orders()->onlyTrashed()->get() as $order) {
+                $order->restore();
             }
         });
     }
@@ -37,10 +45,4 @@ class Customer extends Model
     {
         return $this->hasMany(Contract::class);
     }
-
-    // ***** Alternativa ad aggiungere una foreign_key del cliente nel contratto: *****
-    // public function contracts()
-    // {
-    //     return $this->hasManyThrough(Contract::class, Order::class);
-    // }
 }

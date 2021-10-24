@@ -18,7 +18,8 @@
           <th scope="col">Email</th>
           <th scope="col">Phone</th>
           <th scope="col">Company</th>
-          <th scope="col" colspan="2" class="text-center">Actions</th>
+          <th scope="col">Deleted at</th>
+          <th scope="col">Restore</th>
         </tr>
       </thead>
       <tbody>
@@ -30,12 +31,11 @@
             <td>{{ $customer->email }}</td>
             <td>{{ $customer->phone }}</td>
             <td>{{ $customer->company }}</td>
-            <td><a href="{{ route('customers.edit', $customer) }}">[Edit]</a></td>
+            <td>{{ $customer->deleted_at->format('d/m/Y') }}</td>
             <td>
-              <form id="delete-customer-{{ $customer->id }}-form" action="{{ route('customers.destroy', $customer) }}" method="POST">
+              <form id="restore-customer-{{ $customer->id }}-form" action="{{ route('customers.restore', $customer) }}" method="POST">
                 @csrf
-                @method('delete')
-                <button type="submit" class="btn btn-link p-0">[Delete]</button>
+                <button type="submit" class="btn btn-link p-0">[Restore]</button>
               </form>
             </td>
           </tr>
@@ -48,14 +48,6 @@
 <div class="row">
   <div class="col-md-12">
     {{ $customers->links() }}
-  </div>
-</div>
-
-<hr>
-
-<div class="row py-4">
-  <div class="col-12 text-right">
-    <a href="{{ route('customers.trashed') }}" class="btn btn-warning">x Deleted customers</a>
   </div>
 </div>
 

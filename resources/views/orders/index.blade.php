@@ -21,7 +21,7 @@
         </tr>
       </thead>
       <tbody>
-        @foreach($orders as $order)
+        @forelse($orders as $order)
           <tr>
             <th scope="row">{{ $order->id }}</th>
             <td>{{ $order->title }}</td>
@@ -38,7 +38,11 @@
               </form>
             </td>
           </tr>
-        @endforeach
+        @empty
+          <tr>
+            <th colspan="6" scope="row">No orders found</th>
+          </tr>
+        @endforelse
       </tbody>
     </table>
   </div>

@@ -83,4 +83,18 @@ class CustomersController extends Controller
 
         return redirect()->route('customers.index')->withMessage('Customer deleted successfully');
     }
+
+    // Vista dei clienti soft deleted
+    public function trashed()
+    {
+        return view('customers.trashed')->withCustomers(Customer::onlyTrashed()->paginate(10));
+    }
+
+    // Ripristina il cliente (nei model, su restored() partono i ripristini dei relativi ordini e dei relativi contratti)
+    public function restore($customer_id)
+    {
+        Customer::onlyTrashed()->find($customer_id)->restore();
+
+        return redirect()->route('customers.index')->withMessage('Customer restored successfully');
+    }
 }

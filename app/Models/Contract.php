@@ -16,7 +16,6 @@ class Contract extends Model
         return $this->belongsTo(Order::class);
     }
 
-    // ***** Facoltativo se si decide di utilizzare la HasManyThrough in App\Models\Contract *****
     public function customer()
     {
         return $this->belongsTo(Customer::class);
